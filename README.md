@@ -12,6 +12,9 @@ This project use data from Heritage Pointcloud Instance Collection (HePIC)
 URL to download the data: https://drive.google.com/drive/folders/1NmRegFS9HQQx7IJ7Klpn8mgWbW6bv9Eo
 based on: https://github.com/LTTM/Scan-to-BIM
 #### view the data
+view the example gelabeled point cloud 
 <img width="1400" height="1000" alt="pointcloud_view1_from_a_better_view" src="https://github.com/user-attachments/assets/5f43fc19-74c9-4892-947b-5bbba06e6c5b" />
+view the example gelabeled point cloud in range image form, approach 1
+<img width="2898" height="1484" alt="range_and_label_image" src="https://github.com/user-attachments/assets/87471358-ff78-4f5a-aeca-b688fc2b16db" />
 
 ### 🛠 Installation
