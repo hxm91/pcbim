@@ -8,6 +8,6 @@ The core challenge in BIM automation is the efficient processing of dense 3D sca
 - **Post-Processing Ready:** Prepared for kNN-filtering to ensure sharp object boundaries in 3D space.
 ## Project details
 ###  data
-This project use data from HePIC
+This project use data from Heritage Pointcloud Instance Collection (HePIC)
 URL to download the data: https://drive.google.com/drive/folders/1NmRegFS9HQQx7IJ7Klpn8mgWbW6bv9Eo
 ### 🛠 Installation
