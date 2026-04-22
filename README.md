@@ -10,4 +10,5 @@ The core challenge in BIM automation is the efficient processing of dense 3D sca
 ###  data
 This project use data from Heritage Pointcloud Instance Collection (HePIC)
 URL to download the data: https://drive.google.com/drive/folders/1NmRegFS9HQQx7IJ7Klpn8mgWbW6bv9Eo
+based on: https://github.com/LTTM/Scan-to-BIM
 ### 🛠 Installation
