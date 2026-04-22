@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 def do_range_projection(points, intensity, width=1024, height=64, fov_up=3.0, fov_down=-25.0):
     # 1. Parameter definieren
@@ -54,3 +55,54 @@ def do_label_projection(points, labels, proj_x, proj_y, width=1024, height=64):
     return label_image
 # Beispielanwendung (mit Daten aus dem vorherigen Schritt)
 # range_img = do_range_projection(points, intensity)
+
+def visualize_range_image(range_image, label_image, unique_labels):
+    """Visualizes the range image with labels."""
+    plt.figure(figsize=(20, 10))
+
+    # Plot range image
+    plt.subplot(1, 2, 1)
+    plt.title("Range Image")
+    plt.imshow(range_image, cmap="viridis")
+    plt.colorbar(label="Range")
+
+    # Plot label image
+    plt.subplot(1, 2, 2)
+    plt.title("Label Image")
+    plt.imshow(label_image, cmap="tab10")
+    plt.colorbar(ticks=range(len(unique_labels)), label="Labels")
+
+    plt.tight_layout()
+    plt.savefig('range_and_label_image.png', dpi=150, bbox_inches='tight')
+    print("✓ Saved: range_and_label_image.png")
+    plt.show()
+
+# Load data from file
+file_path = "data_for_debug/101.txt"
+data = np.loadtxt(file_path, delimiter=",", dtype=str)
+
+# Extract points, labels, and IDs
+points = data[:, :3].astype(float)
+labels = data[:, 3]
+
+# Project range image
+range_image = do_range_projection(points, None)
+
+# Compute projection coordinates
+proj_x = 0.5 * (-np.arctan2(points[:, 1], points[:, 0]) / np.pi + 1.0) * 1024
+proj_y = 1.0 - ((np.arcsin(points[:, 2] / np.linalg.norm(points, axis=1)) - (-25.0 / 180.0 * np.pi)) / ((3.0 / 180.0 * np.pi) - (-25.0 / 180.0 * np.pi))) * 64
+
+# Convert to integer indices
+proj_x = np.floor(proj_x).astype(np.int32)
+proj_x = np.clip(proj_x, 0, 1024 - 1)
+proj_y = np.floor(proj_y).astype(np.int32)
+proj_y = np.clip(proj_y, 0, 64 - 1)
+
+# Project label image
+unique_labels = np.unique(labels)
+label_to_color = {label: i for i, label in enumerate(unique_labels)}
+label_indices = np.array([label_to_color[label] for label in labels])
+label_image = do_label_projection(points, label_indices, proj_x, proj_y)
+
+# Visualize the range and label images
+visualize_range_image(range_image, label_image, unique_labels)
